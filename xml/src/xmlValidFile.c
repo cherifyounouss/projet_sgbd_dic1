@@ -1,61 +1,31 @@
 #include <stdio.h>
-#include "../include/libxml2-2.9.6/include/libxml/parser.h"
-#include "../include/libxml2-2.9.6/include/libxml/tree.h"
+#include <stdlib.h>
+#include <string.h>
+#include "../include/lib/xmlparse.c"
+#include <../include/lib/elements.h>
 
+int main(int argc, char *argv[]){
+  char buf[BUFSIZ];
+  // File* fic = fopen("monfichier.xml","r");
+  XML_Parser parser = XML_ParserCreate(NULL);
+  int done;
+  int depth = 0;
+  (void)argc;
+  (void)argv;
 
-/**
- * exampleFunc:
- * @filename: a filename or an URL
- *
- * Parse and validate the resource and free the resulting tree
- */
-static void
-exampleFunc(const char *filename) {
-    xmlParserCtxtPtr ctxt; /* the parser context */
-    xmlDocPtr doc; /* the resulting document tree */
-
-    /* create a parser context */
-    ctxt = xmlNewParserCtxt();
-    if (ctxt == NULL) {
-        fprintf(stderr, "Failed to allocate parser context\n");
-	return;
+  XML_SetUserData(parser, &depth);
+  XML_SetElementHandler(parser, startElement, endElement);
+  do {
+    size_t len = fread(buf, 1, sizeof(buf), stdin);
+    done = len < sizeof(buf);
+    if (XML_Parse(parser, buf, (int)len, done) == XML_STATUS_ERROR) {
+      fprintf(stderr,
+              "%" XML_FMT_STR " at line %" XML_FMT_INT_MOD "u\n",
+              XML_ErrorString(XML_GetErrorCode(parser)),
+              XML_GetCurrentLineNumber(parser));
+      return 1;
     }
-    /* parse the file, activating the DTD validation option */
-    doc = xmlCtxtReadFile(ctxt, filename, NULL, XML_PARSE_DTDVALID);
-    /* check if parsing suceeded */
-    if (doc == NULL) {
-        fprintf(stderr, "Failed to parse %s\n", filename);
-    } else {
-	/* check if validation suceeded */
-        if (ctxt->valid == 0)
-	    fprintf(stderr, "Failed to validate %s\n", filename);
-	/* free up the resulting document */
-	xmlFreeDoc(doc);
-    }
-    /* free up the parser context */
-    xmlFreeParserCtxt(ctxt);
-}
-
-int main(int argc, char **argv) {
-    if (argc != 2)
-        return(1);
-
-    /*
-     * this initialize the library and check potential ABI mismatches
-     * between the version it was compiled for and the actual shared
-     * library used.
-     */
-    LIBXML_TEST_VERSION
-
-    exampleFunc(argv[1]);
-
-    /*
-     * Cleanup function for the XML library.
-     */
-    xmlCleanupParser();
-    /*
-     * this is to debug memory for regression tests
-     */
-    xmlMemoryDump();
-    return(0);
+  } while (!done);
+  XML_ParserFree(parser);
+  return 0;
 }
