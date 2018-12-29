@@ -1,30 +1,61 @@
 #include <stdio.h>
-#include <libxml/parser.h>
-#include <libxml/tree.h>
+#include "../include/libxml2-2.9.6/include/libxml/parser.h"
+#include "../include/libxml2-2.9.6/include/libxml/tree.h"
 
-void isValid(const char *filename) {
-    xmlParserCtxtPtr ctxt; /* variable d'analyse du format xml*/
-    xmlDocPtr doc; /* Structure du document résultant */
 
-    /* Xréation du contexte d'analyse */
+/**
+ * exampleFunc:
+ * @filename: a filename or an URL
+ *
+ * Parse and validate the resource and free the resulting tree
+ */
+static void
+exampleFunc(const char *filename) {
+    xmlParserCtxtPtr ctxt; /* the parser context */
+    xmlDocPtr doc; /* the resulting document tree */
+
+    /* create a parser context */
     ctxt = xmlNewParserCtxt();
     if (ctxt == NULL) {
-        fprintf(stderr, "Erreur d'allocation\n");
+        fprintf(stderr, "Failed to allocate parser context\n");
 	return;
     }
-    /* Option de validation du DTD */
+    /* parse the file, activating the DTD validation option */
     doc = xmlCtxtReadFile(ctxt, filename, NULL, XML_PARSE_DTDVALID);
-    /* Analyse de la structure */
+    /* check if parsing suceeded */
     if (doc == NULL) {
-        fprintf(stderr, "Erreur d'analyse du fichier %s\n", filename);
+        fprintf(stderr, "Failed to parse %s\n", filename);
     } else {
-	/* Validation */
+	/* check if validation suceeded */
         if (ctxt->valid == 0)
-	    fprintf(stderr, "Erreur de validation%s\n", filename);
-	/* Libérer la variable doc */
+	    fprintf(stderr, "Failed to validate %s\n", filename);
+	/* free up the resulting document */
 	xmlFreeDoc(doc);
     }
-    /* fLibérer la variable ctxt */
+    /* free up the parser context */
     xmlFreeParserCtxt(ctxt);
 }
 
+int main(int argc, char **argv) {
+    if (argc != 2)
+        return(1);
+
+    /*
+     * this initialize the library and check potential ABI mismatches
+     * between the version it was compiled for and the actual shared
+     * library used.
+     */
+    LIBXML_TEST_VERSION
+
+    exampleFunc(argv[1]);
+
+    /*
+     * Cleanup function for the XML library.
+     */
+    xmlCleanupParser();
+    /*
+     * this is to debug memory for regression tests
+     */
+    xmlMemoryDump();
+    return(0);
+}
