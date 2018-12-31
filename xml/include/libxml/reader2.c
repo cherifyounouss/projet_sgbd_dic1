@@ -66,7 +66,7 @@ streamFile(const char *filename) {
      * entities substitution and DTD validation
      */
     reader = xmlReaderForFile(filename, NULL,
-                 XML_PARSE_DTDATTR |  /* default DTD attributes */
+         XML_PARSE_DTDATTR |  /* default DTD attributes */
 		 XML_PARSE_NOENT |    /* substitute entities */
 		 XML_PARSE_DTDVALID); /* validate with the DTD */
     if (reader != NULL) {
@@ -78,13 +78,15 @@ streamFile(const char *filename) {
 	/*
 	 * Once the document has been fully parsed check the validation results
 	 */
-	if (xmlTextReaderIsValid(reader) != 1) {
-	    fprintf(stderr, "Le document %s n'est pas valide\n", filename);
-	}
-        xmlFreeTextReader(reader);
-        if (ret != 0) {
-            fprintf(stderr, "%s : Erreur de lecture\n", filename);
+        if (xmlTextReaderIsValid(reader) != 1) {
+            fprintf(stderr, "Le document %s n'est pas valide\n", filename);
+        }else{
+            fprintf(stderr, "Le document %s est valide\n", filename);
         }
+            xmlFreeTextReader(reader);
+            if (ret != 0) {
+                fprintf(stderr, "%s : Erreur de lecture\n", filename);
+            }
     } else {
         fprintf(stderr, "Erreur d'ouverture %s\n", filename);
     }
