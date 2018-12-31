@@ -1,0 +1,17 @@
+<!ELEMENT relations (relation+)>
+<!ELEMENT relation (entite*,association)>
+<!ELEMENT entite (nom+,attributs)>
+<!ELEMENT attributs (matricule,nom,prenom)>
+<!-- <!ELEMENT attributs (matiere,libelle)>
+<!ELEMENT attributs (niveau,option,formation)> -->
+<!ELEMENT association (nom+,attributs)>
+<!ELEMENT nom (#PCDATA)>
+<!ELEMENT matricule (#PCDATA)>
+<!ELEMENT prenom (#PCDATA)>
+<!ELEMENT matiere (#PCDATA)>
+<!ELEMENT libelle (#PCDATA)>
+<!ELEMENT niveau (#PCDATA)>
+<!ELEMENT option (#PCDATA)>
+<!ELEMENT formation (#PCDATA)>
+<!ATTLIST relation type #PCDATA binaire>
+<!-- <!ATTLIST relation type ternaire #IMPLED> -->
