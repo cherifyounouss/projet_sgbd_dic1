@@ -16,5 +16,9 @@ int est_valide(FILE* fic){
             return 0;
         }
     }
+    if (!JSON_checker_done(jc)) {
+        fprintf(stderr, "JSON_checker_end: erreur de syntaxe dans le fichier json\n");
+        exit(1);
+    }
     return 1;
 }
