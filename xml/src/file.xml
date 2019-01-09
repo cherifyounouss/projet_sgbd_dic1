@@ -37,9 +37,9 @@
         <entite>
             <nom>Classe</nom>
             <attributs>
-                <niveau type="String">M20014</niveau>
-                <option type="String">Mbacké</option>
-                <formation type="String">Ahmadou Bamba</formation>
+                <niveau type="String">1</niveau>
+                <option type="String">Informatique</option>
+                <formation type="String">DIC</formation>
             </attributs>
         </entite>
         <entite>

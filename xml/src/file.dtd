@@ -13,5 +13,5 @@
 <!ELEMENT niveau (#PCDATA)>
 <!ELEMENT option (#PCDATA)>
 <!ELEMENT formation (#PCDATA)>
-<!ATTLIST relation type #PCDATA binaire>
+<!ATTLIST relation type PCDATA binaire>
 <!-- <!ATTLIST relation type ternaire #IMPLED> -->
