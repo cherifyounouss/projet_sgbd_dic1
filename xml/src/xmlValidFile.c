@@ -1,21 +1,20 @@
 #include <stdio.h>
-#include <libxml/reader2.h>
+// #include <libxml/reader2.h>
+#include <libxml/xmlreader.h>
 
 /**
- * streamFile:
- * @filename: the file name to parse
- *
- * Parse, validate and print information about an XML file.
+ * xmlIsValid:
+ * *filename: le nom du fichier à valider
+ * 
+ * La fonction analyse, valide et affiche des informations 
  */
-static void
-streamFile(const char *filename) {
+static void xmlIsValid(const char *filename) {
     xmlTextReaderPtr reader;
     int ret;
 
 
     /*
-     * Pass some special parsing options to activate DTD attribute defaulting,
-     * entities substitution and DTD validation
+     * Activation des options pour valider le DTD du fichier xml
      */
     reader = xmlReaderForFile(filename, NULL,
          XML_PARSE_DTDATTR |  /* default DTD attributes */
@@ -28,7 +27,7 @@ streamFile(const char *filename) {
         //     ret = xmlTextReaderRead(reader);
         // }
 	/*
-	 * Once the document has been fully parsed check the validation results
+	 * Une fois l'analyse du fichier, on affiche les résultats de la validation
 	 */
         if (xmlTextReaderIsValid(reader) != 1) {
             fprintf(stderr, "Le document %s n'est pas valide\n", filename);
@@ -44,26 +43,28 @@ streamFile(const char *filename) {
     }
 }
 
+    /*
+	 * un bloc main pour tester la fonction de validation
+	 */
 int main(int argc, char **argv) {
+    /*
+	 * On vérifie si un fichier est bien passer en argument
+	 */
     if (argc != 2){
         fprintf(stderr, "Veuiller renseigner le fichier xml\n");
     }
+    
+    /*
+	 * On valide le fichier
+	 */
+    xmlIsValid(argv[1]);
 
     /*
-     * this initialize the library and check potential ABI mismatches
-     * between the version it was compiled for and the actual shared
-     * library used.
-     */
-    LIBXML_TEST_VERSION
-
-    streamFile(argv[1]);
-
-    /*
-     * Cleanup function for the XML library.
+     * On libére les ressources libxml2 utilisées par la fonction.
      */
     xmlCleanupParser();
     /*
-     * this is to debug memory for regression tests
+     * Une fonction dans libxml2 pour les tests de non-regression
      */
     xmlMemoryDump();
     return(0);
