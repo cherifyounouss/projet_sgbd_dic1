@@ -3,6 +3,10 @@
 #include <unistd.h>
 #include <getopt.h>
 #include <string.h>
+#include <cairo/cairo.h>
+#include <cairo/cairo-svg.h>
+#include "json/include/validation_json.h"
+#include "svg/generation_svg.h"
 
 void afficher_aide(char* argv[]);
 
@@ -19,6 +23,7 @@ int main(int argc, char *argv[])
     char * fichier_entree;
     /*Variable pour stocker le nom du fichier en sorti*/
     char * fichier_sortie;
+    FILE* json_file = NULL;
 
     if(argc <= 1)
         afficher_aide(argv);
@@ -55,9 +60,14 @@ int main(int argc, char *argv[])
         if (strcmp(file_format, "json") == 0 || strcmp(file_format, "xml") == 0){
             if (count_h == 1 ^ count_f == 1) {
                 if (count_o == 1){
-			if(count_t){
-			printf("Print traces\n");	
-                    printf("Processing data...\n");}
+                    if (strcmp(file_format, "json")==0){
+                        //Validation du fichier json
+                        if(est_valide(fichier_entree) == 0){
+                            printf("Fichier json valide\n");
+                            generer_svg(fichier_entree, fichier_sortie);
+                        }
+                    }
+                    //xml
                 }
                 else{
                     (count_o > 1) ? printf("Veuillez renseigner un seul nom pour le fichier en sorti\n") : printf("Veuillez renseigner un argument pour la sortie\n");
@@ -78,7 +88,6 @@ int main(int argc, char *argv[])
         (count_i > 1) ? printf("Veuillez renseigner un seul format pour le fichier en entree\n") : printf("Veuillez renseigner le format du fichier en entree <-i json|xml>\n");
         exit(EXIT_FAILURE);
     }
-    
     return 0;
 }
 
