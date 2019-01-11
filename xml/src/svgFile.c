@@ -4,7 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
-#include "saveFile.c"
+// #include "saveFile.c"
 // #include "cJSON.h"
 // #include "extraction_json.h"
 #define LARGEUR 120
@@ -21,23 +21,23 @@ int main(int argc, char const *argv[])
 {
 
     /*Tableau pour stocker les entites*/
-    s_entite** tab_entites = NULL;
+    // s_entite** tab_entites = NULL;
     /*Tableau pour stocker les associations*/
-    s_assoc** tab_associations = NULL;
+    // s_assoc** tab_associations = NULL;
     int nb_entites = 0, nb_associations = 0;
     // cJSON* json = NULL;
     // json = cJSON_Parse(chaine_json(argv[1]));
     // get_nombre_entites_associations(json, &nb_entites, &nb_associations);
-    tab_entites = malloc(nb_entites*sizeof(s_entite*));
-    tab_associations = malloc(nb_associations*sizeof(s_assoc*));
+    // tab_entites = malloc(nb_entites*sizeof(s_entite*));
+    // tab_associations = malloc(nb_associations*sizeof(s_assoc*));
     // test(json, tab_entites, tab_associations);
     // extraction(argv[1], tab_entites, tab_associations, &nb_entites, &nb_associations);
 
     printf("%d %d\n", nb_entites, nb_associations);
-    for(int i = 0; i < nb_entites; i++)
-    {
-        // afficher_entite(tab_entites[i]);
-    }
+    // for(int i = 0; i < nb_entites; i++)
+    // {
+    //     // afficher_entite(tab_entites[i]);
+    // }
     cairo_surface_t *surface;
     cairo_t *cr;
     char* attributs[] = {"id", "nom", "prenom"};
@@ -50,19 +50,19 @@ int main(int argc, char const *argv[])
     cairo_set_source_rgba(cr, 0, 0, 0, 1);
     cairo_set_line_width(cr, 1);
     cairo_select_font_face(cr, "Purisa", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
-    for(int j = 0; j < nb_associations; j++)
-    {
-        dessiner_association(cr, xc, yc, RADIUS, tab_associations[j]->nom);
+    // for(int j = 0; j < nb_associations; j++)
+    // {
+        dessiner_association(cr, xc, yc, RADIUS, "Dispenser");
         cairo_move_to(cr, xc, yc+RADIUS*3);
         x_swap = xc; y_swap = yc;
         int pos_test = 0;
         cairo_get_current_point(cr, &xc, &yc);
-        for(int i = 0; i < nb_entites; i++)
-        {
-            if(chercher_chaine(tab_entites[i]->associations, tab_associations[j]->nom, tab_entites[i]->nb_assoc) == 0){
+        // for(int i = 0; i < nb_entites; i++)
+        // {
+            // if(chercher_chaine(tab_entites[i]->associations, tab_associations[j]->nom, tab_entites[i]->nb_assoc) == 0){
                 if((pos_test % 2) == 0){
                     left_right = 0;
-                    dessiner_entite(cr, x, y, LARGEUR, LONGUEUR, tab_entites[i]->nom, tab_entites[i]->attribut, tab_entites[i]->nb_attributs, left_right);
+                    dessiner_entite(cr, x, y, LARGEUR, LONGUEUR, "entite", "attribut", 2, left_right);
                     cairo_line_to(cr, x_swap - RADIUS, y_swap);
                     cairo_move_to(cr, x + 700, y);
                     cairo_get_current_point(cr, &x, &y);
@@ -70,16 +70,16 @@ int main(int argc, char const *argv[])
                 }
                 else{
                     left_right = 1;
-                    dessiner_entite(cr, x, y, LARGEUR, LONGUEUR, tab_entites[i]->nom, tab_entites[i]->attribut, tab_entites[i]->nb_attributs, left_right);
+                    dessiner_entite(cr, x, y, LARGEUR, LONGUEUR, "entite", "attribut", 2, left_right);
                     cairo_line_to(cr, x_swap + RADIUS, y_swap);
                     cairo_move_to(cr, x - 700, y + 150);
                     cairo_get_current_point(cr, &x, &y);
                     pos_test++;
                 }
-            }
+            // }
 
-        }
-    }
+        // }
+    // }
     
     cairo_stroke(cr);
     // cairo_fill(cr);
