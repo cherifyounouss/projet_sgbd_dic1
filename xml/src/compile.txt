@@ -2,3 +2,8 @@
  * La commande pour compiler un fichier en gérant les dépendances de la librairie libxml2
  */
 gcc -o example `xml2-config --cflags` example.c `xml2-config --libs`
+
+/*
+ * Assembler les fichiers obkets de tous les fichiers c
+ */
+gcc json/src/cJSON.o json/src/extraction_json.o json/src/JSON_checker.o json/src/validation_json.o xml/src/xmlValidFile.o xml/src/extractData.o xml/src/saveFile.o svg/generation_svg.o main.o -o XJ_Convertor `pkg-config --cflags --libs cairo` `xml2-config --cflags --libs`
