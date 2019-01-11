@@ -7,6 +7,9 @@
 #include <cairo/cairo-svg.h>
 #include "json/include/validation_json.h"
 #include "svg/generation_svg.h"
+#include <libxml/xmlreader.h>
+#include "xml/include/xmlValidFile.h"
+#include "xml/include/extractData.h"
 
 void afficher_aide(char* argv[]);
 
@@ -24,6 +27,9 @@ int main(int argc, char *argv[])
     /*Variable pour stocker le nom du fichier en sorti*/
     char * fichier_sortie;
     FILE* json_file = NULL;
+
+    xmlDoc *doc = NULL;             /*Un document xml*/
+    xmlNode *root_element = NULL;   /*le noeud racine du fichier xml*/
 
     if(argc <= 1)
         afficher_aide(argv);
@@ -60,6 +66,7 @@ int main(int argc, char *argv[])
         if (strcmp(file_format, "json") == 0 || strcmp(file_format, "xml") == 0){
             if (count_h == 1 ^ count_f == 1) {
                 if (count_o == 1){
+                    //json
                     if (strcmp(file_format, "json")==0){
                         //Validation du fichier json
                         if(est_valide(fichier_entree) == 0){
@@ -68,6 +75,22 @@ int main(int argc, char *argv[])
                         }
                     }
                     //xml
+                    if (strcmp(file_format, "xml")==0){
+                        //Validation du fichier xml
+                        xmlIsValid(fichier_entree);
+                        generer_svg(fichier_entree, fichier_sortie);
+                        //extraction
+                         doc = xmlReadFile(fichier_entree, NULL, 0);
+                        if (doc == NULL) {
+                            printf("Erreur survenue lors de l'ouverture du fichier %s\n", argv[1]);
+                        }else{
+                            /*Recuperation du noeud racine*/
+                        root_element = xmlDocGetRootElement(doc);
+
+                        printData(root_element);
+                        }
+
+                    }
                 }
                 else{
                     (count_o > 1) ? printf("Veuillez renseigner un seul nom pour le fichier en sorti\n") : printf("Veuillez renseigner un argument pour la sortie\n");
