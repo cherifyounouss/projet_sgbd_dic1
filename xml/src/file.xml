@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE relations SYSTEM "file.dtd">
 <relations>
-    <relation type="binaire">
+    <relation>
         <entite>
             <nom>Enseignant</nom>
             <attributs>
-                <matricule type="String">M20014</matricule>
-                <nom type="String">Mbacké</nom>
-                <prenom type="String">Ahmadou Bamba</prenom>
+                <matricule>M20014</matricule>
+                <nom>Mbacké</nom>
+                <prenom>Ahmadou Bamba</prenom>
             </attributs>
         </entite>
         <entite>
             <nom>Matière</nom>
             <attributs>
-                <numMatiere type="String">20182009</numMatiere>
-                <libelle type="String">SGBD</libelle>
+                <numMatiere>20182009</numMatiere>
+                <libelle>SGBD</libelle>
                 <!-- <attribut></attribut> -->
             </attributs>
         </entite>
@@ -25,28 +25,28 @@
             </attributs>
         </association>
     </relation>
-    <relation type="ternaire">
+    <relation>
         <entite>
             <nom>Enseignant</nom>
             <attributs>
-                <matricule type="String">M20014</matricule>
-                <nom type="String">Mbacké</nom>
-                <prénom type="String">Ahmadou Bamba</prénom>
+                <matricule>M20014</matricule>
+                <nom>Mbacké</nom>
+                <prénom>Ahmadou Bamba</prénom>
             </attributs>
         </entite>
         <entite>
             <nom>Classe</nom>
             <attributs>
-                <niveau type="String">1</niveau>
-                <option type="String">Informatique</option>
-                <formation type="String">DIC</formation>
+                <niveau>1</niveau>
+                <option>Informatique</option>
+                <formation>DIC</formation>
             </attributs>
         </entite>
         <entite>
             <nom>Matière</nom>
             <attributs>
-                <numMatiere type="String">20182009</numMatiere>
-                <libelle type="String">SGBD</libelle>
+                <numMatiere>20182009</numMatiere>
+                <libelle>SGBD</libelle>
                 <!-- <attribut></attribut> -->
             </attributs>
         </entite>
@@ -57,5 +57,4 @@
             </attributs>
         </association>
     </relation>
-
 </relations>

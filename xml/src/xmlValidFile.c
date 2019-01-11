@@ -29,15 +29,16 @@ static void xmlIsValid(const char *filename) {
 	/*
 	 * Une fois l'analyse du fichier, on affiche les résultats de la validation
 	 */
+    if (ret != 0) { 
+        fprintf(stderr, "Erreur lors de la lecture du fichier %s\n", filename);
+    }else{
         if (xmlTextReaderIsValid(reader) != 1) {
             fprintf(stderr, "Le document %s n'est pas valide\n", filename);
-        }else{
+         }else{
             fprintf(stderr, "Le document %s est valide\n", filename);
-        }
-            xmlFreeTextReader(reader);
-            if (ret != 0) {
-                fprintf(stderr, "Erreur lors de la lecture du fichier %s\n", filename);
             }
+            xmlFreeTextReader(reader);
+        }
     } else {
         fprintf(stderr, "Erreur d'ouverture %s\n", filename);
     }
