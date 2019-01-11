@@ -1,0 +1,63 @@
+{
+    "etudiant": [
+        {
+            "nom": "cherif",
+            "id": "1",
+            "suit": {
+                "matiere": [
+                    {
+                        "id": "1",
+                        "libelle": "Francais",
+                        "enseigne": {
+                            "date_deb": "13/23/1122",
+                            "professeur": [{
+                                "idprof": "2",
+                                "nom": "Ndiaye"
+                            }]
+                        }
+                    },
+                    {
+                        "id": "2",
+                        "libelle": "Anglais",
+                        "enseigne": {
+                            "date_deb": "13/23/1122",
+                            "professeur": [{
+                                "idprof": "2",
+                                "nom": "Ndiaye"
+                            }]
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "nom": "Modou",
+            "id": "2",
+            "suit": {
+                "matiere": [
+                    {
+                        "id": "1",
+                        "libelle": "Francais",
+                        "enseigne": {
+                            "date_deb": "13/23/1122",
+                            "professeur": {
+                                "idprof": "2",
+                                "nom": "Ndiaye"
+                            }
+                        }
+                    },
+                    {
+                        "id": "1",
+                        "libelle": "Anglais",
+                        "enseigne": {
+                            "professeur": {
+                                "idprof": "5",
+                                "nom": "Modou"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
