@@ -39,18 +39,8 @@ void printData(xmlNode * a_node)
         */
         if (cur_node->type == XML_ELEMENT_NODE) {
             save_data(cur_node->name,f);
-            // strcpy(entite->nom,cur_node->name);
                 // printf("Element: %s\n",cur_node->name);
-                // if(strcmp(cur_node->name,"entite") == 0){
-                //     strcpy(entite->nom,cur_node->name);
-                //     entite->nb_assoc++;
-                //     n_entite++;
-                // }
-                // if(strcmp(cur_node->name,"association") == 0){
-                //     strcpy(assoc->nom,cur_node->name);
-                //     n++;
-                // }
-            }
+        }
         /*
         * On recupére la valeur de l'élément
         */
