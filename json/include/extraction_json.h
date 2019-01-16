@@ -69,3 +69,7 @@ void extraction(char* arg_json, s_entite** tab_entites, s_association** tab_asso
 
 /* Fonction pour realiser le parcours recursive de l'arborescence du fichier json */
 void test2(cJSON* json, s_entite** tab_entites, s_association** tab_associations);
+
+void test2_bis(cJSON* json, s_entite** tab_entites, s_association** tab_associations);
+
+void get_nombre_e_a_bis(cJSON* json, int* nb_entites, int* nb_associations);
