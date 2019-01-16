@@ -5,7 +5,9 @@
 #include <string.h>
 #include <cairo/cairo.h>
 #include <cairo/cairo-svg.h>
+#include <curl/curl.h>
 #include "json/include/validation_json.h"
+#include "flux_http.h"
 #include "svg/generation_svg.h"
 #include <libxml/xmlreader.h>
 #include "xml/include/xmlValidFile.h"
@@ -69,16 +71,22 @@ int main(int argc, char *argv[])
                     //json
                     if (strcmp(file_format, "json")==0){
                         //Validation du fichier json
-                        if(est_valide(fichier_entree) == 0){
-                            printf("Fichier json valide\n");
-                            generer_svg(fichier_entree, fichier_sortie);
+                        if(count_f)
+                            est_valide(fichier_entree);
+                        //Validation du flux http
+                        if(count_h){
+                            flux_vers_fichier(request(fichier_entree));
+                            est_valide("fichier_flux");
+                            fichier_entree = "fichier_flux";
                         }
+                        printf("Fichier json valide\n");
+                        generer_svg(fichier_entree, fichier_sortie, count_t);
                     }
                     //xml
                     if (strcmp(file_format, "xml")==0){
                         //Validation du fichier xml
                         xmlIsValid(fichier_entree);
-                        generer_svg(fichier_entree, fichier_sortie);
+                        // generer_svg(fichier_entree, fichier_sortie);
                         //extraction
                          doc = xmlReadFile(fichier_entree, NULL, 0);
                         if (doc == NULL) {
