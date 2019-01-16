@@ -28,6 +28,14 @@
                         }
                     }
                 ]
+            },
+            "appartient" : {
+                "classe": [
+                    {
+                        "id": "2",
+                        "nom": "DUT INFO"
+                    }
+                ]
             }
         },
         {
