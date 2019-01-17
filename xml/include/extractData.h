@@ -1,6 +1,8 @@
 /*
- * fonction d'extraction des données du fichier xml
+ * fonctions d'extraction des données du fichier xml
  */
+#include <libxml/tree.h>
+void extractionData(char *filename);
 void printData(xmlNode * a_node);
 
 /*
@@ -9,19 +11,10 @@ void printData(xmlNode * a_node);
 void save_data(const xmlChar *data,FILE *fic);
 
 /*
- * Fonction de récupération des nombres d'entites et d'associations décrites dans le fichier xml
+ * Fonction de génération du fichier svg
  */
-void generer_nb_entites_association(int *nb_entites,int *nb_assos);
 
-/*
- * nombre d'entites
- */
-typedef int nb_entites;
-
-/*
- * nombre d'associations
- */
-typedef int nb_assos;
+void creerEntite(xmlChar *name);
 
 /*
  * Une structure entite 
@@ -46,3 +39,7 @@ typedef struct s_assoc{
     int nb_attributs;
 
 }s_assoc;
+/*
+ * Fonction qui retourne le nombre d'entités d'un fichier
+ */
+int nombre_entite(xmlNode *root);

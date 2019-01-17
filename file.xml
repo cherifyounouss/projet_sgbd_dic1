@@ -15,15 +15,9 @@
             <attributs>
                 <numMatiere>20182009</numMatiere>
                 <libelle>SGBD</libelle>
-                <!-- <attribut></attribut> -->
             </attributs>
         </entite>
-        <association>
-            <nom>Dispenser</nom>
-            <attributs>
-                <attribut></attribut>
-            </attributs>
-        </association>
+        <association>Dispenser</association>
     </relation>
     <relation>
         <entite>
@@ -47,14 +41,8 @@
             <attributs>
                 <numMatiere>20182009</numMatiere>
                 <libelle>SGBD</libelle>
-                <!-- <attribut></attribut> -->
             </attributs>
         </entite>
-        <association>
-            <nom>Faire cours</nom>
-            <attributs>
-                <attribut></attribut>
-            </attributs>
-        </association>
+        <association>Faire cours</association>
     </relation>
 </relations>

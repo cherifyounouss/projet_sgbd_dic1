@@ -25,7 +25,7 @@
 	/*
 	 * Une fois l'analyse du fichier, on affiche les résultats de la validation
 	 */
-    if (ret != 0) { 
+    if (ret == 0) { 
         fprintf(stderr, "Erreur lors de la lecture du fichier %s\n", filename);
         // fflush(stderr);
     }else{
