@@ -86,18 +86,12 @@ int main(int argc, char *argv[])
                     if (strcmp(file_format, "xml")==0){
                         //Validation du fichier xml
                         xmlIsValid(fichier_entree);
+<<<<<<< HEAD
+=======
                         // generer_svg(fichier_entree, fichier_sortie);
+>>>>>>> ac057907e00639b79e164db6e8ae8f8231aa3aae
                         //extraction
-                         doc = xmlReadFile(fichier_entree, NULL, 0);
-                        if (doc == NULL) {
-                            printf("Erreur survenue lors de l'ouverture du fichier %s\n", argv[1]);
-                        }else{
-                            /*Recuperation du noeud racine*/
-                        root_element = xmlDocGetRootElement(doc);
-
-                        printData(root_element);
-                        }
-
+                        extractionData(fichier_entree);
                     }
                 }
                 else{

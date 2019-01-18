@@ -1,11 +1,10 @@
 <!ELEMENT relations (relation+)>
 <!ELEMENT relation (entite*,association)>
-<!ELEMENT entite (nom+,attributs)>
-<!ELEMENT attributs (matricule?,nom?,prenom?)>
-<!ELEMENT attributs (numMatiere?,libelle?)>
-<!-- <!ELEMENT attributs (matiere,libelle)>
-<!ELEMENT attributs (niveau,option,formation)> -->
-<!ELEMENT association (nom+,attributs)>
+<!ELEMENT entite (nom,attributs)>
+<!-- <!ELEMENT attributs (matricule,nom,prenom)>
+<!ELEMENT attributs (matiere,libelle)> -->
+<!ELEMENT attributs (matricule*,nom*,prenom*,niveau*,option*,formation*,matiere*,libelle*)> 
+<!ELEMENT association (#PCDATA)>
 <!ELEMENT nom (#PCDATA)>
 <!ELEMENT matricule (#PCDATA)>
 <!ELEMENT prenom (#PCDATA)>
