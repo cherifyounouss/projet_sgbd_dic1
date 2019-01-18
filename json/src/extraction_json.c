@@ -4,6 +4,15 @@
 #include "../include/cJSON.h"
 #include "../include/extraction_json.h"
 
+void get_nombre_e_a_bis(cJSON* json, int* nb_entites, int* nb_associations){
+    get_nombre_entites_associations(json, nb_entites, nb_associations);
+}
+
+void test2_bis(cJSON* json, s_entite** tab_entites, s_association** tab_associations){
+    test2(json, tab_entites, tab_associations);
+}
+
+
 /* Cette fonction permet de recuper le contenu du fichier json au niveau d'une chaine de caracteres */
 char* chaine_json(char *filename)
 {
@@ -49,6 +58,8 @@ void test2(cJSON* json, s_entite** tab_entites, s_association** tab_associations
         // afficher_entite(e);
         if(json->child)
             test2(json->child, tab_entites, tab_associations);
+        if(json->next && json->next->string)
+            test2_bis(json->next, tab_entites, tab_associations);            
     }
 
     if(cJSON_IsString(json)){
@@ -67,8 +78,11 @@ void test2(cJSON* json, s_entite** tab_entites, s_association** tab_associations
         }
         if(json->child)
             test2(json->child, tab_entites, tab_associations);
+        if(json->next && json->next->string)
+            test2_bis(json->next, tab_entites, tab_associations);            
     }
 }
+
 
 void test(cJSON* json, s_entite** tab_entites, s_association** tab_associations){
     // printf("Size : %d\n", cJSON_GetArraySize(json));
@@ -230,6 +244,8 @@ void get_nombre_entites_associations(cJSON* json, int* nb_entites, int* nb_assoc
             *nb_entites = *nb_entites + 1;
         if(json->child)
             get_nombre_entites_associations(json->child, nb_entites, nb_associations);
+        if(json->next && json->next->string)
+            get_nombre_e_a_bis(json->next, nb_entites, nb_associations);        
     }
 
     if(cJSON_IsString(json)){
@@ -242,6 +258,8 @@ void get_nombre_entites_associations(cJSON* json, int* nb_entites, int* nb_assoc
             *nb_associations = *nb_associations + 1;
         if(json->child)
             get_nombre_entites_associations(json->child, nb_entites, nb_associations);
+        if(json->next && json->next->string)
+            get_nombre_e_a_bis(json->next, nb_entites, nb_associations);            
     }
 }
 

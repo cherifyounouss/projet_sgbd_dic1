@@ -12,7 +12,7 @@
 #define RADIUS 50
 
 
-void generer_svg(char* json_file, char* svg_file)
+void generer_svg(char* json_file, char* svg_file, int count_t)
 {
 
     /*Tableau pour stocker les entites*/
@@ -26,13 +26,20 @@ void generer_svg(char* json_file, char* svg_file)
     tab_entites = malloc(nb_entites*sizeof(s_entite*));
     tab_associations = malloc(nb_associations*sizeof(s_association*));
     test(json, tab_entites, tab_associations);
-    // extraction(argv[1], tab_entites, tab_associations, &nb_entites, &nb_associations);
-
-    // printf("%d %d\n", nb_entites, nb_associations);
-    // for(int i = 0; i < nb_entites; i++)
-    // {
-    //     afficher_entite(tab_entites[i]);
-    // }
+    if (count_t) {
+        printf("\n\nNombres d'entites: %d, nombres d'associations: %d\n\n", nb_entites, nb_associations);
+        for(int i = 0; i < nb_entites; i++)
+        {
+            afficher_entite(tab_entites[i]);
+        }
+        printf("\n");
+        for(int i = 0; i < nb_associations; i++)
+        {
+            afficher_association(tab_associations[i]);
+        }
+        
+    }
+    
     cairo_surface_t *surface;
     cairo_t *cr;
     char* attributs[] = {"id", "nom", "prenom"};

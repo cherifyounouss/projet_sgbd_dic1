@@ -15,30 +15,6 @@ void save_data(const xmlChar *data,FILE *fic);
  */
 
 void creerEntite(xmlChar *name);
-
-/*
- * Une structure entite 
- */
-typedef struct s_entite{
-    /* data */
-    char *nom;
-    char **attribut;
-    char **associations;
-    int nb_assoc;
-    int nb_attributs;
-
-}s_entite;
-
-/*
- * Une structure association
- */
-typedef struct s_assoc{
-    /* data */
-    char *nom;
-    char **attribut;
-    int nb_attributs;
-
-}s_assoc;
 /*
  * Fonction qui retourne le nombre d'entités d'un fichier
  */

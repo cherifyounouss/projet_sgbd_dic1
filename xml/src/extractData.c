@@ -14,18 +14,8 @@
 *f est fichier dans lequel est sauvegardé les données extraites
 */
 FILE *f;
-/*
-* entite est un tableau contenant l'ensemble des entités extraites
-*/
 int nb_entites=0;
-// s_entite **entite;
-// entite = malloc(sizeof(entite->nom)+sizeof);
-/*
-* assoc est un tableau contenant l'ensemble des associations extraites
-*/
-// s_assoc **assoc;
-// int i=0;
-// nb_assos n;
+xmlChar *nEntite;
 /*
  * extractionData:
  * *filename: un fichier xml
@@ -70,12 +60,14 @@ void printData(xmlNode * a_node)
         */
         if (cur_node->type == XML_ELEMENT_NODE) {
             save_data(cur_node->name,f);
+            printf("Elément: %s\n",cur_node->name);
+            strcpy(nEntite,cur_node->name);
+            creerEntite(nEntite);
            
         }
             /*
             * Appel récursif
             */
-        //    i++;
             printData(cur_node->children);
     }
 }
@@ -98,11 +90,11 @@ void creerEntite(xmlChar *name){
          /********************************/
                cairo_surface_t *surface;
                 cairo_t *cr;
-                char* attributs[] = {"id", "nom", "prenom"};
+                char *attributs[]= {"id", "nom", "prenom"};
                 double x = 20.0, y = 20.0, xc = 450, yc = 100;
                 double x_swap = 0.0, y_swap = 0.0;
                 int left_right = 0;
-                surface = cairo_svg_surface_create("FILE.svg", 2560, 1707);
+                surface = cairo_svg_surface_create("file.svg", 2560, 1707);
                 cr = cairo_create(surface);
 
                 cairo_set_source_rgba(cr, 0, 0, 0, 1);
